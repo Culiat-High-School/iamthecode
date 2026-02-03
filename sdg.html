@@ -67,6 +67,10 @@
       font-size: 16px;
     }
 
+    body.modal-open {
+      overflow: hidden;
+    }
+
     img {
       max-width: 100%;
       height: auto;
@@ -341,8 +345,8 @@
     .w-image-grid {
       width: min(94%, var(--max-width));
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--gap);
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--gap-lg);
     }
 
     .w-card {
@@ -353,6 +357,8 @@
       display: flex;
       flex-direction: column;
       transition: all var(--transition-base);
+      cursor: pointer;
+      position: relative;
     }
 
     .w-card:hover {
@@ -380,6 +386,7 @@
 
     .w-card-body {
       padding: 20px;
+      position: relative;
     }
 
     .w-card-title {
@@ -396,17 +403,174 @@
       line-height: 1.6;
     }
 
-    @media (max-width: 980px) {
+    .w-click-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      font-size: 0.7rem;
+      color: var(--brand-red-light);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.7;
+      transition: opacity var(--transition-fast);
+    }
+
+    .w-card:hover .w-click-hint {
+      opacity: 1;
+    }
+
+    /* ================= SOLUTION MODAL ================= */
+    .solution-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .solution-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: var(--card-radius-lg);
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: scale(0.7);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .solution-modal.active .modal-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-red-dark) 100%);
+      color: white;
+      padding: 32px;
+      position: relative;
+      border-radius: var(--card-radius-lg) var(--card-radius-lg) 0 0;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all var(--transition-base);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(90deg);
+    }
+
+    .modal-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+      font-family: 'Merriweather', serif;
+      line-height: 1.3;
+    }
+
+    .modal-body {
+      padding: 40px;
+    }
+
+    .modal-image-wrapper {
+      margin-bottom: 32px;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .modal-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        max-height: 95vh;
+      }
+
+      .modal-header {
+        padding: 24px;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+        padding-right: 40px;
+      }
+
+      .modal-body {
+        padding: 24px;
+      }
+
+      .modal-text {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
       .w-image-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 560px) {
-      .w-image-grid {
-        grid-template-columns: 1fr;
-      }
-
       .w-band-header {
         font-size: 1.75rem;
       }
@@ -993,7 +1157,7 @@
       <h2 id="w-band-heading" class="w-band-header">The Problem</h2>
 
       <div class="w-image-grid" role="list" aria-label="Image gallery">
-        <article class="w-card" role="listitem">
+        <article class="w-card" role="listitem" tabindex="0" data-solution="digital-divide">
           <div class="w-img-wrap"><img class="w-img-media" src="digital divide.jpg" alt="Picture 1"></div>
           <div class="w-card-body">
             <div class="w-card-title">The Digital Divide in Education</div>
@@ -1002,10 +1166,13 @@
               evident in low-income, rural, and disadvantaged communities, limiting participation in online learning. As
               education becomes increasingly digital, closing this gap is essential to achieving equitable learning
               opportunities and the goals of SDG 4.</div>
+            <div class="w-click-hint">
+              <i class="fas fa-hand-pointer"></i> Click to see solution
+            </div>
           </div>
         </article>
 
-        <article class="w-card" role="listitem">
+        <article class="w-card" role="listitem" tabindex="0" data-solution="out-of-school">
           <div class="w-img-wrap"><img class="w-img-media" src="out of school.jpg" alt="Picture 2"></div>
           <div class="w-card-body">
             <div class="w-card-title">Out‑of‑School Children and Youth</div>
@@ -1014,10 +1181,13 @@
               people worldwide are not enrolled, with the highest rates in low-income and conflict-affected regions.
               This ongoing exclusion underscores the persistent barriers to achieving universal quality education under
               SDG 4.</div>
+            <div class="w-click-hint">
+              <i class="fas fa-hand-pointer"></i> Click to see solution
+            </div>
           </div>
         </article>
 
-        <article class="w-card" role="listitem">
+        <article class="w-card" role="listitem" tabindex="0" data-solution="gender-inequality">
           <div class="w-img-wrap"><img class="w-img-media" src="gender education.jpg" alt="Picture 3"></div>
           <div class="w-card-body">
             <div class="w-card-title">Girls and Gender Inequality in Education</div>
@@ -1026,10 +1196,13 @@
               Socio-economic challenges, cultural norms, and limited opportunities often prevent girls from enrolling or
               completing school, while higher dropout rates due to early marriage, household duties, and unsafe learning
               environments further widen the gender gap.</div>
+            <div class="w-click-hint">
+              <i class="fas fa-hand-pointer"></i> Click to see solution
+            </div>
           </div>
         </article>
 
-        <article class="w-card" role="listitem">
+        <article class="w-card" role="listitem" tabindex="0" data-solution="learning-crisis">
           <div class="w-img-wrap"><img class="w-img-media" src="learning crisis.jpg" alt="Picture 4"></div>
           <div class="w-card-body">
             <div class="w-card-title">Learning Crisis Among Students</div>
@@ -1038,6 +1211,9 @@
               children and 230 million lower-secondary adolescents. Most of these students attend school, highlighting
               that enrollment alone does not ensure learning. Tackling this learning crisis is essential for improving
               education quality globally.</div>
+            <div class="w-click-hint">
+              <i class="fas fa-hand-pointer"></i> Click to see solution
+            </div>
           </div>
         </article>
       </div>
@@ -1048,70 +1224,26 @@
     </svg>
   </div>
 
-  <!-- ===== iamtheCODE section ===== -->
-  <section class="iamthecode-section" id="sdg">
-    <div class="iam-wrapper">
-      <h2>How iamtheCODE club tackles the problem:</h2>
-
-      <div class="iam-multicolor-strip" aria-hidden="true">
-        <span class="iam-c1"></span><span class="iam-c2"></span><span class="iam-c3"></span><span
-          class="iam-c4"></span>
-        <span class="iam-c5"></span><span class="iam-c6"></span><span class="iam-c7"></span><span
-          class="iam-c8"></span>
+  <!-- ===== SOLUTION MODAL ===== -->
+  <div class="solution-modal" id="solutionModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="modal-close" id="modalClose" aria-label="Close modal">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-badge">Our Solution</div>
+        <h2 class="modal-title" id="modalTitle"></h2>
       </div>
-
-      <div class="iam-row left">
-        <img src="code 1.jpg" alt="Module 12">
-        <div class="iam-text">
-          <h3>Reducing Digital Divide</h3>
-          <p>IamtheCODE Club helps bridge the digital divide by lending free laptops and devices to students without
-            home access. Through coding clubs and learning programs, learners can use these tools to practice
-            programming, complete projects, and participate in digital activities. By providing hands-on access to
-            technology, IamtheCODE ensures all students can develop essential coding and digital skills in an inclusive
-            learning environment.</p>
+      <div class="modal-body">
+        <div class="modal-image-wrapper" id="modalImageWrapper">
+          <img id="modalImage" src="" alt="Solution image">
         </div>
+        <div class="modal-text" id="modalText"></div>
       </div>
-
-      <div class="iam-row right">
-        <img src="code 2.jpg" alt="Module 11">
-        <div class="iam-text">
-          <h3>Outreach Program</h3>
-          <p>Despite improved access to education, some children in nearby communities remain out of school. To address
-            this, Dr. Ammar N. Torrevillas, together with the IamtheCODE Club adviser and the teaching and non-teaching
-            staff of Culiat High School, conducts outreach in the Muslim compound to encourage families to enroll their
-            children. This direct engagement helps bring out-of-school youth back into formal education and reinforces
-            the school's commitment to inclusive, quality learning under SDG 4.</p>
-        </div>
-      </div>
-
-      <div class="iam-row left">
-        <img src="code 3.jpg" alt="Module 10">
-        <div class="iam-text">
-          <h3>Empowering Women in Education and Technology</h3>
-          <p>IamtheCODE Club tackles gender inequality by empowering girls and women through inclusive technology
-            education. By providing safe learning spaces, encouraging participation in coding activities, and offering
-            mentorship, the program helps women build confidence and digital skills. It also challenges stereotypes and
-            barriers that limit access to education, promoting equal opportunities for learning and leadership. Through
-            skills development and peer support, women are empowered to fully engage in education and pursue
-            opportunities in technology and beyond.</p>
-        </div>
-      </div>
-
-      <div class="iam-row right">
-        <img src="code 4.jpg" alt="Module 1">
-        <div class="iam-text">
-          <h3>Learning Through Collaboration</h3>
-          <p>IamtheCODE Club addresses the learning crisis by fostering collaborative and interactive learning
-            environments. Through group programming, peer-to-peer teaching, and teamwork-based projects, students share
-            ideas, explain concepts, and solve problems together. This approach enhances understanding, reinforces
-            knowledge retention, and builds confidence in applying skills. By emphasizing active participation over
-            passive instruction, IamtheCODE ensures students genuinely learn and develop essential problem-solving and
-            digital skills.</p>
-        </div>
-      </div>
-
     </div>
-  </section>
+  </div>
+
+  
 
   <!-- ===== PRINCIPAL INTERVIEW SECTION ===== -->
   <section class="principal-interview" aria-labelledby="principal-interview-heading">
@@ -1144,6 +1276,91 @@
 
   <!-- ===== Scripts ===== -->
   <script>
+    // Solution data mapping
+    const solutions = {
+      'digital-divide': {
+        title: 'Reducing Digital Divide',
+        image: 'code 1.jpg',
+        text: 'IamtheCODE Club helps bridge the digital divide by lending free laptops and devices to students without home access. Through coding clubs and learning programs, learners can use these tools to practice programming, complete projects, and participate in digital activities. By providing hands-on access to technology, IamtheCODE ensures all students can develop essential coding and digital skills in an inclusive learning environment.'
+      },
+      'out-of-school': {
+        title: 'Community Outreach Program',
+        image: 'code 2.jpg',
+        text: 'Despite improved access to education, some children in nearby communities remain out of school. To address this, Dr. Ammar N. Torrevillas, together with the IamtheCODE Club adviser and the teaching and non-teaching staff of Culiat High School, conducts outreach in the Muslim compound to encourage families to enroll their children. This direct engagement helps bring out-of-school youth back into formal education and reinforces the school\'s commitment to inclusive, quality learning under SDG 4.'
+      },
+      'gender-inequality': {
+        title: 'Empowering Women in Education and Technology',
+        image: 'code 3.jpg',
+        text: 'IamtheCODE Club tackles gender inequality by empowering girls and women through inclusive technology education. By providing safe learning spaces, encouraging participation in coding activities, and offering mentorship, the program helps women build confidence and digital skills. It also challenges stereotypes and barriers that limit access to education, promoting equal opportunities for learning and leadership. Through skills development and peer support, women are empowered to fully engage in education and pursue opportunities in technology and beyond.'
+      },
+      'learning-crisis': {
+        title: 'Learning Through Collaboration',
+        image: 'code 4.jpg',
+        text: 'IamtheCODE Club addresses the learning crisis by fostering collaborative and interactive learning environments. Through group programming, peer-to-peer teaching, and teamwork-based projects, students share ideas, explain concepts, and solve problems together. This approach enhances understanding, reinforces knowledge retention, and builds confidence in applying skills. By emphasizing active participation over passive instruction, IamtheCODE ensures students genuinely learn and develop essential problem-solving and digital skills.'
+      }
+    };
+
+    // Modal elements
+    const modal = document.getElementById('solutionModal');
+    const modalClose = document.getElementById('modalClose');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalImage = document.getElementById('modalImage');
+    const modalText = document.getElementById('modalText');
+
+    // Open modal function
+    function openSolutionModal(solutionKey) {
+      const solution = solutions[solutionKey];
+      if (solution) {
+        modalTitle.textContent = solution.title;
+        modalImage.src = solution.image;
+        modalImage.alt = solution.title;
+        modalText.textContent = solution.text;
+        
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+      }
+    }
+
+    // Close modal function
+    function closeSolutionModal() {
+      modal.classList.remove('active');
+      document.body.classList.remove('modal-open');
+    }
+
+    // Event listeners for problem cards
+    document.querySelectorAll('.w-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const solutionKey = this.getAttribute('data-solution');
+        openSolutionModal(solutionKey);
+      });
+
+      // Keyboard support
+      card.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const solutionKey = this.getAttribute('data-solution');
+          openSolutionModal(solutionKey);
+        }
+      });
+    });
+
+    // Close modal on button click
+    modalClose.addEventListener('click', closeSolutionModal);
+
+    // Close modal on background click
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeSolutionModal();
+      }
+    });
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeSolutionModal();
+      }
+    });
+
     // FAQ toggle with character swap
     const thinkingImage = "thinking.jpg";
     const ideaImage = "idea.jpg";
