@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xyrus Khiel H. Gittap | Portfolio</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Merriweather:wght@300;400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+/* ================= GLOBAL VARIABLES ================= */
+:root {
+  /* Updated to match SDG website color scheme */
+  --brand-red: #c41e3a;
+  --brand-red-dark: #9a1729;
+  --brand-red-light: #d63447;
+  --bg-main: #ffffff;
+  --bg-light: #f8f9fa;
+  --bg-accent: #fef6f7;
+  --text-main: #2c3e50;
+  --text-muted: #5a6c7d;
+  --text-light: #7f8c9a;
+  --card-shadow: rgba(196, 30, 58, 0.08);
+  --card-shadow-hover: rgba(196, 30, 58, 0.16);
+
+  /* Layout - consistent */
+  --max-width: 1100px;
+  --gap: 20px;
+  --gap-sm: 12px;
+  --gap-lg: 32px;
+
+  /* Components - unified */
+  --header-height: 88px;
+  --header-height-sm: 72px;
+  --card-radius: 16px;
+  --card-radius-sm: 12px;
+  --card-radius-lg: 20px;
+
+  /* Transitions - consistent */
+  --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-main);
+  overflow-x: hidden;
+  padding-top: var(--header-height);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Accessible focus outline - unified */
+:focus {
+  outline: 2px solid var(--brand-red-light);
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand-red-light);
+  outline-offset: 3px;
+}
+
+/* ================= HEADER (copied from SDG website) ================= */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: var(--brand-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 32px;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header-left,
+.header-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-left {
+  left: 24px;
+}
+
+.header-right {
+  right: 24px;
+}
+
+.header-left .logo {
+  height: 64px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.header-nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.header-nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: all var(--transition-base);
+  display: inline-block;
+}
+
+.header-nav a:focus,
+.header-nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* ================= HERO SECTION ================= */
+.hero-section {
+  margin-top: 0;
+  background: #7a0000;
+  padding: 90px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.profile-image-wrapper {
+  flex-shrink: 0;
+}
+
+.hero-profile-pic {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  object-fit: cover;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.hero-role {
+  font-size: 22px;
+  color: rgba(255,255,255,0.95);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.hero-tagline {
+  font-size: 17px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+}
+
+/* ================= SECTION CONTAINER ================= */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--brand-red);
+  margin-bottom: 16px;
+}
+
+.section-divider {
+  width: 80px;
+  height: 4px;
+  background: var(--brand-red);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* ================= ABOUT SECTION ================= */
+.about-section {
+  background-color: #7a0000;
+  width: 100%;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-icon {
+  width: 160px;
+  height: 160px;
+  background-color: #7a0000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto -35px auto;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.about-icon i {
+  color: #ffffff;
+  font-size: 72px;
+}
+
+.about-text-box {
+  background-color: #000;
+  border-radius: 40px;
+  padding: 60px 50px 40px;
+  color: #ffffff;
+}
+
+.about-text-box h2 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.about-text-box p {
+  margin-top: 16px;
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.95;
+}
+
+/* ================= ACCOMPLISHMENTS SECTION ================= */
+.accomplishments-section {
+  padding: 100px 20px;
+  background: var(--bg-light);
+}
+
+.accomplishments-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.accomplishment-card {
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.accomplishment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--brand-red), var(--brand-red-dark));
+}
+
+.accomplishment-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 45px rgba(196, 30, 58, 0.16);
+}
+
+.card-image {
+  height: 280px;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.accomplishment-card:hover .card-image img {
+  transform: scale(1.08);
+}
+
+.card-content {
+  padding: 32px 28px;
+}
+
+.card-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--brand-red);
+  margin-bottom: 14px;
+}
+
+.card-content p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* ================= EXPERIENCE SECTION ================= */
+.experience-section {
+  padding: 100px 20px;
+  background: #fff;
+}
+
+.experience-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.experience-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  background: var(--bg-light);
+  padding: 50px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.experience-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(196, 30, 58, 0.12);
+}
+
+.experience-card:nth-child(even) {
+  grid-template-columns: 1fr 1fr;
+}
+
+.experience-card:nth-child(even) .exp-image-wrapper {
+  order: 2;
+}
+
+.experience-card:nth-child(even) .exp-text-content {
+  order: 1;
+}
+
+.exp-image-wrapper {
+  width: 100%;
+  height: 350px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+}
+
+.exp-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.exp-text-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--brand-red);
+  margin-bottom: 16px;
+}
+
+.exp-text-content p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+/* ================= TESTIMONIALS SECTION ================= */
+.testimonials-section {
+  padding: 100px 20px;
+  background: var(--bg-light);
+}
+
+.testimonial-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.testimonial-intro {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.testimonial-intro p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.video-testimonial-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 50px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--brand-red), var(--brand-red-dark));
+}
+
+.video-testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(196, 30, 58, 0.12);
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  background: #000;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.testimonial-caption {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.testimonial-author {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--brand-red);
+  margin-bottom: 8px;
+}
+
+.testimonial-role {
+  font-size: 15px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ================= FOOTER (copied from SDG website) ================= */
+footer {
+  background: var(--text-main);
+  color: #fff;
+  padding: 60px 0 32px;
+  text-align: center;
+  position: relative;
+  margin-top: 0;
+}
+
+.footer-seal {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.footer-copy {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.footer-sub {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1200px) {
+  .accomplishments-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    padding-top: var(--header-height-sm);
+  }
+
+  header {
+    height: var(--header-height-sm);
+  }
+
+  .header-left .logo {
+    height: 56px;
+  }
+
+  .header-nav {
+    font-size: 14px;
+    gap: 6px;
+  }
+
+  .header-nav a {
+    padding: 8px 12px;
+  }
+  
+  .profile-hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+  
+  .hero-text h1 {
+    font-size: 38px;
+  }
+  
+  .section-header h2 {
+    font-size: 36px;
+  }
+  
+  .accomplishments-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  /* About section responsive */
+  .about-text-box {
+    padding: 50px 30px 35px;
+  }
+  
+  /* Experience section responsive */
+  .experience-card {
+    grid-template-columns: 1fr;
+    padding: 40px 30px;
+  }
+  
+  .experience-card:nth-child(even) .exp-image-wrapper,
+  .experience-card:nth-child(even) .exp-text-content {
+    order: initial;
+  }
+  
+  /* Testimonials responsive */
+  .video-testimonial-card {
+    padding: 35px 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-text h1 {
+    font-size: 32px;
+  }
+  
+  .hero-role {
+    font-size: 18px;
+  }
+  
+  .hero-tagline {
+    font-size: 15px;
+  }
+  
+  .section-header h2 {
+    font-size: 30px;
+  }
+  
+  .about-icon {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .about-icon i {
+    font-size: 54px;
+  }
+  
+  .about-text-box h2 {
+    font-size: 28px;
+  }
+  
+  .about-text-box p {
+    font-size: 16px;
+  }
+  
+  .experience-card {
+    padding: 30px 20px;
+  }
+  
+  .exp-image-wrapper {
+    height: 240px;
+  }
+  
+  .exp-text-content h3 {
+    font-size: 24px;
+  }
+  
+  /* Testimonials responsive */
+  .video-testimonial-card {
+    padding: 30px 20px;
+  }
+  
+  .testimonial-intro p {
+    font-size: 15px;
+  }
+  
+  .testimonial-author {
+    font-size: 20px;
+  }
+  
+  .testimonial-role {
+    font-size: 14px;
+  }
+}
+
+/* ================= Scrollbar styling for consistency ================= */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-red-light);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-red);
+}
+  </style>
+</head>
+
+<body>
+
+<!-- ===== HEADER (copied from SDG website) ===== -->
+<header>
+  <div class="header-left">
+    <img src="logo.png" alt="Culiat High School" class="logo">
+  </div>
+
+  <nav class="header-nav" aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="profile.html">Our Team</a>
+    <a href="journey.html">Journey</a>
+    <a href="sdg.html">SDG</a>
+    <a href="project.html">Projects</a>
+    <a href="thankyou.html">Acknowledgement</a>
+  </nav>
+
+  <div class="header-right"></div>
+</header>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero-section">
+  <div class="hero-content">
+    <div class="profile-hero">
+      <div class="profile-image-wrapper">
+        <img src="pogi.png" alt="Xyrus Khiel H. Gittap" class="hero-profile-pic">
+      </div>
+      <div class="hero-text">
+        <h1>Xyrus Khiel H. Gittap</h1>
+        <p class="hero-role">Vice-President | iamtheCODE Club</p>
+        <p class="hero-tagline">TVL Student • Computer Systems Servicing • Code Enthusiast</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section class="about-section">
+  <div class="about-container">
+    <div class="about-icon">
+      <i class="fa-solid fa-user-graduate"></i>
+    </div>
+
+    <div class="about-text-box">
+      <h2>About Me</h2>
+      <p>
+        I am Xyrus Khiel H. Gittap, a 17-year-old student currently enrolled in the Technical-Vocational-Livelihood (TVL) strand and Computer Systems Servicing at Culiat High School. I have a strong interest in technology and coding. I enjoy learning new things that help me develop my skills and prepare for my future career.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACCOMPLISHMENTS SECTION ===== -->
+<section class="accomplishments-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Accomplishments</h2>
+      <div class="section-divider"></div>
+    </div>
+    
+    <div class="accomplishments-grid">
+      <div class="accomplishment-card">
+        <div class="card-image">
+          <img src="xyrus achi 1.png" alt="Rank 1 Achievement">
+        </div>
+        <div class="card-content">
+          <h3>Rank 1 in Completion Performance</h3>
+          <p>One of my major achievements was earning Rank 1 in completion performance among all learners over the past six months. Through consistent effort, discipline, and strong time management, I was able to complete all assigned tasks on time.</p>
+        </div>
+      </div>
+
+      <div class="accomplishment-card">
+        <div class="card-image">
+          <img src="xyrus achi 2.jpg" alt="First Completer">
+        </div>
+        <div class="card-content">
+          <h3>First Club Completer</h3>
+          <p>One of my notable achievements was becoming the first completer in our club. As one of the earliest to finish all required activities, I demonstrated initiative, responsibility, and commitment to my learning goals. This accomplishment motivated me to stay focused and organized, while also setting a positive example for my fellow club members to remain dedicated and consistent in completing their tasks.</p>
+        </div>
+      </div>
+
+      <div class="accomplishment-card">
+        <div class="card-image">
+          <img src="xyrus achi 3.jpg" alt="Club Membership">
+        </div>
+        <div class="card-content">
+          <h3>Club Membership</h3>
+          <p>My biggest achievement is being part of the club. Joining the club gave me the opportunity to grow both academically and personally by learning new skills, collaborating with others, and engaging in meaningful activities. Being part of this community helped me build confidence, develop discipline, and gain valuable experiences that continue to shape my interest in learning and self-improvement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE SECTION ===== -->
+<section class="experience-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Experience</h2>
+      <div class="section-divider"></div>
+    </div>
+    
+    <div class="experience-grid">
+      <div class="experience-card">
+        <div class="exp-image-wrapper">
+          <img src="xyrus exp 1.jpg" alt="Frontliner Experience">
+        </div>
+        <div class="exp-text-content">
+          <h3>Club Frontliner</h3>
+          <p>Being one of the frontliners of the club challenged me to step up and take responsibility. I learned how to communicate clearly, support my fellow members, and contribute actively to our activities.</p>
+        </div>
+      </div>
+
+      <div class="experience-card">
+        <div class="exp-image-wrapper">
+          <img src="code 0.jpg" alt="IamtheCode Journey">
+        </div>
+        <div class="exp-text-content">
+          <h3>IamtheCode Journey</h3>
+          <p>Being part of the IamtheCode club has been an exciting adventure filled with learning, challenges, and growth. Every activity and project pushed me to explore new skills, solve problems creatively, and step out of my comfort zone. Working alongside fellow members made the journey enjoyable and inspiring, as we supported each other through challenges and celebrated our achievements together. Looking back, the experience was more than coding—it was a journey of discovery, teamwork, and personal development that I will always cherish.</p>
+        </div>
+      </div>
+
+      <div class="experience-card">
+        <div class="exp-image-wrapper">
+          <img src="xyrus exp 3.jpg" alt="Website Creation">
+        </div>
+        <div class="exp-text-content">
+          <h3>Website Creation</h3>
+          <p>Creating the website was a meaningful learning experience for me. At first, it was challenging to figure out how everything should work, but step by step, I learned through practice and mistakes. Designing the layout and fixing errors taught me to be patient and persistent. More than just coding, the experience gave me confidence and showed me that I can turn my ideas into something real and useful.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS SECTION ===== -->
+<section class="testimonials-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Testimonials</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="testimonial-container">
+      <div class="testimonial-intro">
+        <p>
+          Hear what others have to say about my journey and contributions to the iamtheCODE club.
+        </p>
+      </div>
+
+      <div class="video-testimonial-card">
+        <div class="video-wrapper" role="region" aria-label="Video testimonial">
+          <video controls>
+            <source src="XYRUS KHIEL GITTAP CSS Student_Leader.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        
+        <div class="testimonial-caption">
+          <p class="testimonial-author">Club Testimonial</p>
+          <p class="testimonial-role">Reflections on Growth and Achievement</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER (copied from SDG website) ===== -->
+<footer>
+  <img src="culiat.jpg" alt="Culiat High School Seal" class="footer-seal">
+  <div class="footer-copy">© 2026 Culiat High School | iamtheCODE</div>
+  <div class="footer-sub">All rights reserved.</div>
+</footer>
+
+</body>
+</html>
